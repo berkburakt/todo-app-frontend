@@ -9,14 +9,14 @@ import SwiftUI
 
 class TodoItemFetcher: ObservableObject {
     @Published var todoItems = [TodoItem]()
-    let listId: Int
+    private let listId: Int
     
     init(listId: Int) {
         self.listId = listId
     }
     
     func getItems() {
-        let url = "\(Constants.BASE_URL)\(Endpoints.LISTS)/\(listId)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists(id: listId).value)"
         
         URLSession.request(
             url: url,
@@ -33,16 +33,14 @@ class TodoItemFetcher: ObservableObject {
     }
     
     func markItem(id: Int) {
-        let url = "\(Constants.BASE_URL)\(Endpoints.ITEMS)/\(id)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.items(id: id).value)"
         
         URLSession.put(
             url: url) { result in
             switch result {
-            case .success(let isSuccess):
-                if isSuccess {
-                    DispatchQueue.main.async {
-                        self.getItems()
-                    }
+            case .success():
+                DispatchQueue.main.async {
+                    self.getItems()
                 }
             case .failure(let error):
                 print(error)
@@ -51,17 +49,15 @@ class TodoItemFetcher: ObservableObject {
     }
     
     func addItem(title: String) {
-        let url = "\(Constants.BASE_URL)\(Endpoints.LISTS)/\(listId)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists(id: listId).value)"
         let item = Item(title: title)
         
         URLSession.post(
             url: url,
             model: item) { result in
             switch result {
-            case .success(let isSuccess):
-                if isSuccess {
-                    self.getItems()
-                }
+            case .success():
+                self.getItems()
             case .failure(let error):
                 print(error)
             }
@@ -76,16 +72,14 @@ class TodoItemFetcher: ObservableObject {
     
     func deleteItem(index: Int) {
         let id = todoItems[index].id
-        let url = "\(Constants.BASE_URL)\(Endpoints.ITEMS)/\(id)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.items(id: id).value)"
         
         URLSession.delete(
             url: url) { result in
             switch result {
-            case .success(let isSuccess):
-                if isSuccess {
-                    DispatchQueue.main.async {
-                        self.todoItems.remove(at: index)
-                    }
+            case .success():
+                DispatchQueue.main.async {
+                    self.todoItems.remove(at: index)
                 }
             case .failure(let error):
                 print(error)

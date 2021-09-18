@@ -11,7 +11,7 @@ class TodoListFetcher: ObservableObject {
     @Published var todoLists = [TodoList]()
     
     func getLists() {
-        let url = "\(Constants.BASE_URL)\(Endpoints.LISTS)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists().value)"
         
         URLSession.request(
             url: url,
@@ -28,17 +28,15 @@ class TodoListFetcher: ObservableObject {
     }
     
     func addList(title: String) {
-        let url = "\(Constants.BASE_URL)\(Endpoints.LISTS)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists().value)"
         let item = Item(title: title)
         
         URLSession.post(
             url: url,
             model: item) { result in
             switch result {
-            case .success(let isSuccess):
-                if isSuccess {
-                    self.getLists()
-                }
+            case .success():
+                self.getLists()
             case .failure(let error):
                 print(error)
             }
@@ -47,16 +45,14 @@ class TodoListFetcher: ObservableObject {
     
     func deleteList(index: Int) {
         let id = todoLists[index].id
-        let url = "\(Constants.BASE_URL)\(Endpoints.LISTS)/\(id)"
+        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists(id: id).value)"
         
         URLSession.delete(
             url: url) { result in
             switch result {
-            case .success(let isSuccess):
-                if isSuccess {
-                    DispatchQueue.main.async {
-                        self.todoLists.remove(at: index)
-                    }
+            case .success():
+                DispatchQueue.main.async {
+                    self.todoLists.remove(at: index)
                 }
             case .failure(let error):
                 print(error)

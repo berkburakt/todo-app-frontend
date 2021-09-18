@@ -9,7 +9,7 @@ import SwiftUI
 
 extension URLSession {
     static func put(url: String,
-                       completion: @escaping (Result<Bool, Error>) -> Void
+                       completion: @escaping (Result<Void, Error>) -> Void
     ) {
         guard let URL = URL(string: url) else {
             completion(.failure(NetworkError.invalidUrl))
@@ -27,14 +27,14 @@ extension URLSession {
                 return
             }
             
-            completion(.success(true))
+            completion(.success(()))
         }
         
         task.resume()
     }
     
     static func delete(url: String,
-                       completion: @escaping (Result<Bool, Error>) -> Void
+                       completion: @escaping (Result<Void, Error>) -> Void
     ) {
         guard let URL = URL(string: url) else {
             completion(.failure(NetworkError.invalidUrl))
@@ -52,7 +52,7 @@ extension URLSession {
                 return
             }
             
-            completion(.success(true))
+            completion(.success(()))
         }
         
         task.resume()
@@ -60,7 +60,7 @@ extension URLSession {
     
     static func post<T: Codable>(url: String,
                                   model: T,
-                                  completion: @escaping (Result<Bool, Error>) -> Void
+                                  completion: @escaping (Result<Void, Error>) -> Void
     ) {
         guard let encoded = try? JSONEncoder().encode(model) else {
             completion(.failure(NetworkError.invalidModel))
@@ -84,7 +84,7 @@ extension URLSession {
                 return
             }
             
-            completion(.success(true))
+            completion(.success(()))
         }
         
         task.resume()
