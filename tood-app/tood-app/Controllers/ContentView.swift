@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var fetcher = Fetcher()
+    @ObservedObject var fetcher = TodoListFetcher()
     @State private var showPopUp = false
     @State private var editMode = EditMode.inactive
     

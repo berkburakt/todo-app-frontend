@@ -9,7 +9,7 @@ struct TodoItem: Codable, Identifiable {
     let id: Int
     let listId: Int
     let title: String
-    let isDone: Bool
+    var isDone: Bool
     
     enum CodingKeys: String, CodingKey {
         case id = "id"

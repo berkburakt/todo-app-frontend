@@ -24,14 +24,14 @@ struct PopUpView: View {
                     .padding([.leading, .trailing], 10)
                                 
                 HStack(alignment: .center, spacing: 0) {
-                    Button("Save") {
-                        onSave($title.wrappedValue)
+                    Button("Cancel") {
+                        onCancel()
                     }
                     .font(.system(size: 20))
                     .frame(maxWidth: .infinity)
                     
-                    Button("Cancel") {
-                        onCancel()
+                    Button("Save") {
+                        onSave($title.wrappedValue)
                     }
                     .font(.system(size: 20))
                     .frame(maxWidth: .infinity)

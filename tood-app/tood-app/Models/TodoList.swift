@@ -8,11 +8,9 @@
 struct TodoList: Codable, Identifiable {
     let id: Int
     let title: String
-    let items: [TodoItem]
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
-        case items = "items"
     }
 }

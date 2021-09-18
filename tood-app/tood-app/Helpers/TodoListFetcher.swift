@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Fetcher: ObservableObject {
+class TodoListFetcher: ObservableObject {
     @Published var todoLists = [TodoList]()
     
     func getLists() {

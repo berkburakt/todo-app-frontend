@@ -21,8 +21,10 @@ struct TodoListView: View {
         } else {
             List {
                 ForEach(todoLists, id: \.id) { item in
-                    Text(item.title)
-                        .padding()
+                    NavigationLink(destination: ItemsView(listId: item.id, title: item.title)) {
+                        Text(item.title)
+                    }
+                    .padding()
                 }
                 .onDelete { indexSet in
                     if let index = indexSet.first {
