@@ -44,4 +44,23 @@ class Fetcher: ObservableObject {
             }
         }
     }
+    
+    func deleteList(index: Int) {
+        let id = todoLists[index].id
+        let url = "\(Constants.BASE_URL)\(Endpoints.LISTS)/\(id)"
+        
+        URLSession.delete(
+            url: url) { result in
+            switch result {
+            case .success(let isSuccess):
+                if isSuccess {
+                    DispatchQueue.main.async {
+                        self.todoLists.remove(at: index)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

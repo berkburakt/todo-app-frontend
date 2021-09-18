@@ -8,6 +8,31 @@
 import SwiftUI
 
 extension URLSession {
+    static func delete(url: String,
+                       completion: @escaping (Result<Bool, Error>) -> Void
+    ) {
+        guard let URL = URL(string: url) else {
+            completion(.failure(NetworkError.invalidUrl))
+            return
+        }
+        
+        var request = URLRequest(url: URL)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "DELETE"
+        
+        let task = self.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(NetworkError.invalidData))
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            
+            completion(.success(true))
+        }
+        
+        task.resume()
+    }
+    
     static func post<T: Codable>(url: String,
                                   model: T,
                                   completion: @escaping (Result<Bool, Error>) -> Void
