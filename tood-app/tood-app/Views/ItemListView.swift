@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct ItemListView: View {
-    let onDelete: (_ id: Int) -> ()
-    let onMove: (_ source: IndexSet, _ destination: Int) -> ()
-    let onTap: (_ id: Int) -> ()
-    let todoItems: [TodoItem]
+    private let onDelete: (_ id: Int) -> ()
+    private let onMove: (_ source: IndexSet, _ destination: Int) -> ()
+    private let onTap: (_ id: Int) -> ()
+    private let todoItems: [TodoItem]
+    
+    init(todoItems: [TodoItem], onDelete: @escaping (_ id: Int) -> (), onMove: @escaping (_ source: IndexSet, _ destination: Int) -> (), onTap: @escaping (_ id: Int) -> ()) {
+        self.todoItems = todoItems
+        self.onDelete = onDelete
+        self.onMove = onMove
+        self.onTap = onTap
+    }
     
     var body: some View {
         if todoItems.isEmpty {
@@ -47,12 +54,5 @@ struct ItemListView: View {
             }
             
         }
-    }
-    
-    init(todoItems: [TodoItem], onDelete: @escaping (_ id: Int) -> (), onMove: @escaping (_ source: IndexSet, _ destination: Int) -> (), onTap: @escaping (_ id: Int) -> ()) {
-        self.todoItems = todoItems
-        self.onDelete = onDelete
-        self.onMove = onMove
-        self.onTap = onTap
     }
 }

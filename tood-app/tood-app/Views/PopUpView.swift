@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct PopUpView: View {
-    let onSave: (_ title: String) -> ()
-    let onCancel: () -> ()
-    let titleText: String
+    private let onSave: (_ title: String) -> ()
+    private let onCancel: () -> ()
+    private let titleText: String
     @State private var title: String = ""
+    
+    init(onSave: @escaping (_ title: String) -> (), onCancel: @escaping () -> (), titleText: String) {
+        self.onSave = onSave
+        self.onCancel = onCancel
+        self.titleText = titleText
+    }
 
     var body: some View {
         ZStack {
@@ -40,11 +46,5 @@ struct PopUpView: View {
         }
         .frame(width: 300, height: 150)
         .cornerRadius(20).shadow(radius: 20)
-    }
-    
-    init(onSave: @escaping (_ title: String) -> (), onCancel: @escaping () -> (), titleText: String) {
-        self.onSave = onSave
-        self.onCancel = onCancel
-        self.titleText = titleText
     }
 }

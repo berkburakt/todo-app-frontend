@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct ItemsView: View {
-    @ObservedObject var fetcher: TodoItemFetcher
+    @ObservedObject private var fetcher: TodoItemFetcher
     @State private var showPopUp = false
     @State private var editMode = EditMode.inactive
     private let listId: Int
     private let title: String
+    
+    init(listId: Int, title: String) {
+        self.listId = listId
+        self.title = title
+        fetcher = TodoItemFetcher(listId: listId)
+    }
     
     var body: some View {
         ZStack {
@@ -52,11 +58,5 @@ struct ItemsView: View {
     
     private func onAdd() {
         showPopUp = true
-    }
-    
-    init(listId: Int, title: String) {
-        self.listId = listId
-        self.title = title
-        fetcher = TodoItemFetcher(listId: listId)
     }
 }
