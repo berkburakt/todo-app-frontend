@@ -14,8 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color(UIColor.systemGroupedBackground).edgesIgnoringSafeArea(.all)
+            BaseView(content: {
                 TodoListView(todoLists: fetcher.todoLists) { index in
                     fetcher.deleteList(index: index)
                 } onMove: { source, destination in
@@ -30,25 +29,11 @@ struct ContentView: View {
                         showPopUp = false
                     }, titleText: "Add List")
                 }
-            }
-            .navigationTitle("Todo Lists")
-            .navigationBarItems(leading: EditButton(), trailing: addButton)
-            .environment(\.editMode, $editMode)
+            },
+            showPopUp: $showPopUp,
+            navigationTitle: "Todo Lists")
             .onAppear(perform: fetcher.getLists)
         }
-    }
-    
-    private var addButton: some View {
-        switch editMode {
-        case .inactive:
-            return AnyView(Button(action: onAdd) { Image(systemName: "plus") })
-        default:
-            return AnyView(EmptyView())
-        }
-    }
-    
-    private func onAdd() {
-        showPopUp = true
     }
 }
 

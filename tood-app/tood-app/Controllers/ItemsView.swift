@@ -21,8 +21,7 @@ struct ItemsView: View {
     }
     
     var body: some View {
-        ZStack {
-            Color(UIColor.systemGroupedBackground).edgesIgnoringSafeArea(.all)
+        BaseView(content: {
             ItemListView(todoItems: fetcher.todoItems) { index in
                 fetcher.deleteItem(index: index)
             } onMove: { source, destination in
@@ -30,6 +29,7 @@ struct ItemsView: View {
             } onTap: { id in
                 fetcher.markItem(id: id)
             }
+            
             if $showPopUp.wrappedValue {
                 PopUpView(onSave: { title in
                     fetcher.addItem(title: title)
@@ -38,25 +38,9 @@ struct ItemsView: View {
                     showPopUp = false
                 }, titleText: "Add Item")
             }
-        }
-        .navigationTitle(title)
-        .navigationBarItems(leading: EditButton(), trailing: addButton)
-        .environment(\.editMode, $editMode)
-        .onAppear {
-            fetcher.getItems()
-        }
-    }
-    
-    private var addButton: some View {
-        switch editMode {
-        case .inactive:
-            return AnyView(Button(action: onAdd) { Image(systemName: "plus") })
-        default:
-            return AnyView(EmptyView())
-        }
-    }
-    
-    private func onAdd() {
-        showPopUp = true
+        },
+        showPopUp: $showPopUp,
+        navigationTitle: title)
+        .onAppear(perform: fetcher.getItems)
     }
 }

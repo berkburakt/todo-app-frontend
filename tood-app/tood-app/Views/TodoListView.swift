@@ -45,11 +45,12 @@ struct TodoListView: View {
                 }
                 .onMove(perform: onMove)
                 .cornerRadius(5)
-                .shadow(color: .gray, radius: 10, x: 5, y: 5)
+                .shadow(color: .gray, radius: 5, x: -5, y: 5)
+                .listRowBackground(Color.clear)
             }
-            .listStyle(GroupedListStyle())
             .onAppear {
                 UITableView.appearance().backgroundColor = UIColor.systemGroupedBackground
+                UITableViewCell.appearance().backgroundColor = UIColor.clear
             }
         }
     }

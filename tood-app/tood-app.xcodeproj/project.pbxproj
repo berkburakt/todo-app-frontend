@@ -26,6 +26,7 @@
 		B7D364FE26F646F100FD3048 /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D364FD26F646F100FD3048 /* ItemsView.swift */; };
 		B7D3650426F649B100FD3048 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D3650326F649B100FD3048 /* ItemListView.swift */; };
 		B7D3650626F64BB200FD3048 /* TodoItemFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D3650526F64BB200FD3048 /* TodoItemFetcher.swift */; };
+		B7F9B02E26F6E0BD00D2DDC7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F9B02D26F6E0BD00D2DDC7 /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		B7D364FD26F646F100FD3048 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		B7D3650326F649B100FD3048 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		B7D3650526F64BB200FD3048 /* TodoItemFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemFetcher.swift; sourceTree = "<group>"; };
+		B7F9B02D26F6E0BD00D2DDC7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				B7D364F726F61D0A00FD3048 /* TodoListView.swift */,
 				B7D364F926F6249E00FD3048 /* PopUpView.swift */,
 				B7D3650326F649B100FD3048 /* ItemListView.swift */,
+				B7F9B02D26F6E0BD00D2DDC7 /* BaseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				B7D364FE26F646F100FD3048 /* ItemsView.swift in Sources */,
 				B7D3650426F649B100FD3048 /* ItemListView.swift in Sources */,
 				B7D364B526F5F32400FD3048 /* SceneDelegate.swift in Sources */,
+				B7F9B02E26F6E0BD00D2DDC7 /* BaseView.swift in Sources */,
 				B7D364E826F5FB8F00FD3048 /* Enums.swift in Sources */,
 				B7D364B726F5F32400FD3048 /* ContentView.swift in Sources */,
 			);

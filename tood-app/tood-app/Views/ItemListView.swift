@@ -42,7 +42,6 @@ struct ItemListView: View {
                     .background(Color.white)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        print(item.title)
                         if(!item.isDone) {
                             onTap(item.id)
                         }
@@ -56,9 +55,9 @@ struct ItemListView: View {
                 }
                 .onMove(perform: onMove)
                 .cornerRadius(5)
-                .shadow(color: .gray, radius: 10, x: 5, y: 5)
+                .shadow(color: .gray, radius: 5, x: -5, y: 5)
+                .listRowBackground(Color.clear)
             }
-            .listStyle(GroupedListStyle())
         }
     }
 }
