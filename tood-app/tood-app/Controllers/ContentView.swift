@@ -15,11 +15,13 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                Color(UIColor.systemGroupedBackground).edgesIgnoringSafeArea(.all)
                 TodoListView(todoLists: fetcher.todoLists) { index in
                     fetcher.deleteList(index: index)
                 } onMove: { source, destination in
                     fetcher.todoLists.move(fromOffsets: source, toOffset: destination)
                 }
+
                 if $showPopUp.wrappedValue {
                     PopUpView(onSave: { title in
                         fetcher.addList(title: title)

@@ -27,10 +27,16 @@ struct TodoListView: View {
         } else {
             List {
                 ForEach(todoLists, id: \.id) { item in
-                    NavigationLink(destination: ItemsView(listId: item.id, title: item.title)) {
-                        Text(item.title)
+                    HStack {
+                        NavigationLink(destination: ItemsView(listId: item.id, title: item.title)) {
+                            Text(item.title)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .padding()
+                    .padding(30)
+                    .background(Color.white)
+                    .contentShape(Rectangle())
+                    .frame(height: 70)
                 }
                 .onDelete { indexSet in
                     if let index = indexSet.first {
@@ -38,8 +44,13 @@ struct TodoListView: View {
                     }
                 }
                 .onMove(perform: onMove)
+                .cornerRadius(5)
+                .shadow(color: .gray, radius: 10, x: 5, y: 5)
             }
-            
+            .listStyle(GroupedListStyle())
+            .onAppear {
+                UITableView.appearance().backgroundColor = UIColor.systemGroupedBackground
+            }
         }
     }
 }

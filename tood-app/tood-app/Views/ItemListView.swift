@@ -31,19 +31,23 @@ struct ItemListView: View {
                 ForEach(todoItems, id: \.id) { item in
                     HStack {
                         Text(item.title)
-                            .padding()
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         
                         if item.isDone {
                             Image(systemName: "checkmark.circle")
-                                .padding()
                                 .frame(maxHeight: .infinity)
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 50)
+                    .padding(30)
+                    .background(Color.white)
+                    .contentShape(Rectangle())
                     .onTapGesture {
-                        onTap(item.id)
+                        print(item.title)
+                        if(!item.isDone) {
+                            onTap(item.id)
+                        }
                     }
+                    .frame(height: 70)
                 }
                 .onDelete { indexSet in
                     if let index = indexSet.first {
@@ -51,8 +55,10 @@ struct ItemListView: View {
                     }
                 }
                 .onMove(perform: onMove)
+                .cornerRadius(5)
+                .shadow(color: .gray, radius: 10, x: 5, y: 5)
             }
-            
+            .listStyle(GroupedListStyle())
         }
     }
 }

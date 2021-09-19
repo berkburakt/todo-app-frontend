@@ -22,6 +22,7 @@ struct ItemsView: View {
     
     var body: some View {
         ZStack {
+            Color(UIColor.systemGroupedBackground).edgesIgnoringSafeArea(.all)
             ItemListView(todoItems: fetcher.todoItems) { index in
                 fetcher.deleteItem(index: index)
             } onMove: { source, destination in
@@ -44,7 +45,6 @@ struct ItemsView: View {
         .onAppear {
             fetcher.getItems()
         }
-        
     }
     
     private var addButton: some View {
