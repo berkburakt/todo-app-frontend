@@ -20,6 +20,10 @@ struct PopUpView: View {
     }
 
     var body: some View {
+        Rectangle()
+        .fill(Color.gray)
+        .opacity(0.7)
+        .ignoresSafeArea()
         ZStack {
             Color.white
             VStack(alignment: .center, spacing: 20) {
