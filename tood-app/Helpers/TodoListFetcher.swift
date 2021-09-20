@@ -11,7 +11,7 @@ class TodoListFetcher: ObservableObject {
     @Published var todoLists = [TodoList]()
     
     func getLists() {
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists().value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.lists())"
         
         URLSession.request(
             url: url,
@@ -28,7 +28,7 @@ class TodoListFetcher: ObservableObject {
     }
     
     func addList(title: String) {
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists().value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.lists())"
         let item = Item(title: title)
         
         URLSession.post(
@@ -45,7 +45,7 @@ class TodoListFetcher: ObservableObject {
     
     func deleteList(index: Int) {
         let id = todoLists[index].id
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists(id: id).value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.lists(id: id))"
         
         URLSession.delete(
             url: url) { result in

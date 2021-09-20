@@ -16,7 +16,7 @@ class TodoItemFetcher: ObservableObject {
     }
     
     func getItems() {
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists(id: listId).value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.lists(id: listId))"
         
         URLSession.request(
             url: url,
@@ -33,7 +33,7 @@ class TodoItemFetcher: ObservableObject {
     }
     
     func markItem(id: Int) {
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.items(id: id).value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.items(id: id))"
         
         URLSession.put(
             url: url) { result in
@@ -49,7 +49,7 @@ class TodoItemFetcher: ObservableObject {
     }
     
     func addItem(title: String) {
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.lists(id: listId).value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.lists(id: listId))"
         let item = Item(title: title)
         
         URLSession.post(
@@ -72,7 +72,7 @@ class TodoItemFetcher: ObservableObject {
     
     func deleteItem(index: Int) {
         let id = todoItems[index].id
-        let url = "\(Constants.BASE_URL.rawValue)\(Endpoints.items(id: id).value)"
+        let url = "\(Constants.BASE_URL)\(Endpoints.items(id: id))"
         
         URLSession.delete(
             url: url) { result in

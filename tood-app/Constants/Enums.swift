@@ -11,26 +11,26 @@ enum NetworkError: Error {
     case invalidModel
 }
 
-enum Endpoints {
-    case lists(id: Int? = nil)
-    case items(id: Int? = nil)
-    
-    var value: String {
-        switch self {
-        case .lists(id: let id):
-            guard let id = id else {
-                return "/lists"
-            }
-            return "/lists/\(id)"
-        case .items(id: let id):
-            guard let id = id else {
-                return "/items"
-            }
-            return "/items/\(id)"
+struct Endpoints {
+    static func lists(id: Int? = nil) -> String {
+        guard let id = id else {
+            return "/lists"
         }
+        return "/lists/\(id)"
     }
+    
+    static func items(id: Int? = nil) -> String {
+        guard let id = id else {
+            return "/items"
+        }
+        return "/items/\(id)"
+    }
+    
+    private init() {}
 }
 
-enum Constants: String {
-    case BASE_URL = "http://localhost:3000"
+struct Constants {
+    static let BASE_URL = "http://localhost:3000"
+    
+    private init() {}
 }
